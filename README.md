@@ -33,3 +33,37 @@ self.webView.UIDelegate = self;
     
 }
 </pre>
+
+Inject JS below to WKWebView on MainFrameStart
+<pre>
+var app = {};
+app.invokeNative = function(methodAndArg){
+var result=prompt('YOUR_PROMPT_KEYWORD',JSON.stringify(methodAndArg)); //This will call native runJavaScriptTextInputPanelWithPrompt
+//asume APP returned JSONString, which contains errorMsg or payload return value
+var resultObj=JSON.parse(result);
+if(resultObj.errorMsg) {//error handling
+    var error = new Error(resultObj.errorMsg);
+    error.code = resultObj.errorCode;
+    throw error;
+} else {
+    return resultObj.payload;
+}
+
+//define your global functions
+window.demoFunc = function(){
+    return app.invokeNative({'"funcName":window.demoFunc',"args":arguments})
+}
+...
+
+</pre>
+
+Handle JS 'invokeNative' function and return value for functions you defined
+<pre>
+...
+</pre>
+
+Finally, simply write code below to call native and get some return value
+<pre>
+var res = window.demoFunc('a')
+<pre>
+
