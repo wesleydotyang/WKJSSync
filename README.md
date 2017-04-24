@@ -1,5 +1,5 @@
 # WKJSSync
-JS call native by url is async in WK. This is a solve for sync.
+JS call native by url is async in WKWebView. This is a solve for sync.
 
 
 in `WKViewController`
