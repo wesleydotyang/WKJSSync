@@ -62,7 +62,7 @@ Handle JS 'invokeNative' function and return value for functions you defined
 ...
 </pre>
 
-Finally, simply write code below to call native and get some return value
+Finally,in JS simply write code below to call native and get some return value
 <pre>
 var res = window.demoFunc('a')
 <pre>
